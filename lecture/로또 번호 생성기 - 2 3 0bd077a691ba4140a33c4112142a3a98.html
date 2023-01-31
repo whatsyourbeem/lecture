@@ -1,0 +1,857 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>로또 번호 생성기 - 2/3</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0bd077a6-91ba-4140-a33c-4112142a3a98" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎰</span></div><h1 class="page-title">로또 번호 생성기 - 2/3</h1></header><div class="page-body"><nav id="fe1bd4d7-6510-45a3-b266-cbaa08c29713" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3930e855-49e5-41c5-89be-326dc8b17448">화면 만들기</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e2c06f16-f9a1-485c-9862-34a6f9bcdfb5">빈 화면 만들기</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9a0f150a-6d6a-491c-afa5-c1bf1719daa3">요소(Component) 추가하기</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#15f8c733-1815-4363-b37b-a8a6da1999d4">요소(Component) 정렬하기</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9521417e-d7bc-4153-a97d-7dab2b0220a0">스타일 수정하기</a></div></nav><p id="cb46dfa7-76cf-4a59-9080-703d36b4f61f" class="">
+</p><h1 id="3930e855-49e5-41c5-89be-326dc8b17448" class="">화면 만들기</h1><p id="a2aa4b7b-ec6a-4b35-a5af-9002ea678888" class="">이번에는 화면을 만들어 보겠습니다.</p><p id="71aaabaf-7631-4d70-bbae-ecca7235c206" class="">버튼을 누르면 번호가 6개 뜨는 단순한 화면 이에요.</p><p id="276b6bd0-75b6-4e0c-981b-abab1c96910b" class="">버튼을 눌러도 반응하지 않는, 모양만 있는 상태까지만 만들꺼에요.</p><p id="56e8c88d-0262-4f8c-8217-b36c0a80224f" class="">
+</p><h2 id="e2c06f16-f9a1-485c-9862-34a6f9bcdfb5" class="">빈 화면 만들기</h2><p id="6ba4bc0b-3312-4cf5-b056-80c739f64914" class="">RnLottoNumGen폴더(저의 경우에는 C:\workspace\RnLottoNumGen, 이하 <strong>프로젝트 폴더</strong> 라고 부를께요!)에 보시면 App.tsx 파일이 있습니다.
+우린 “Welcome to React Native”라고 뜨는 기본 RN 앱을 사용하지 않을꺼니까 삭제하겠습니다.
+App.tsx를 삭제해주세요.</p><p id="140157fa-2653-40be-bb87-7cf765496c96" class="">그리고 프로젝트 폴더에 새 파일을 만들어 주세요. 이름은 “App.js”로 해주세요. 이 파일에 계산기의 모든 코드를 다 작성할 예정입니다.</p><p id="1e185d50-ada9-42b8-b250-c0b97987cdc5" class="">
+</p><p id="2446b4f8-1336-4a11-9317-6d2cb7c83ebc" class="">아래의 코드를 App.js에 넣어주세요.</p><p id="2b9724cc-a4cd-4a89-9b4c-bd5376aaf40f" class="">기본적인 RN 화면을 띄우기 위한 템플릿 입니다. (마치 초등학교 일기장엔 꼭 줄칸이 있고, 날짜, 날씨?, 제목 이 있는것 처럼요)</p><p id="7abd2f0f-d913-473a-8efd-fa32bf36854b" class="">한줄씩 보시면서 기억해주세요. 이 형태를 자주 쓰게 될꺼에요.</p><pre id="fdba0172-ca9a-4bb4-9e27-441f5e7984f2" class="code"><code>import React from &#x27;react&#x27;;
+import { View, StyleSheet } from &#x27;react-native&#x27;;
+
+const App = () =&gt; {
+
+  return (
+    &lt;View&gt;
+      
+    &lt;/View&gt;
+  )
+};
+
+const styles = StyleSheet.create({
+
+});
+export default App;</code></pre><p id="2e5216fa-3f09-48fe-ac8e-dd5471268f8c" class="">
+</p><p id="c1305b28-7bc9-462d-b98d-b5bbc3b93d16" class="">간단히 설명드리면 아래와 같이 <strong>“</strong><mark class="highlight-orange"><strong>로직 작성</strong></mark><strong>”</strong> 부분과 <strong>“</strong><mark class="highlight-blue"><strong>틀 작성</strong></mark><strong>”</strong> 부분, “<strong><mark class="highlight-purple">스타일 작성</mark></strong>” 부분으로 나눠서 만들어볼 예정입니다.</p><p id="5c02be7b-f392-4a87-80b3-8f79f2eb7a05" class=""><mark class="highlight-blue">틀,</mark> <mark class="highlight-orange">로직, </mark><mark class="highlight-purple">스타일</mark>이 꼭 정해진 위치가 있는 건 아니지만, 처음 접하시는 분들의 이해를 돕기 위해 저는 이렇게 나눠서 “30분만에 앱 개발”을 진행해 보겠습니다.</p><p id="ccffccb3-44f8-48b2-9b4c-53272f2c8e11" class="">
+</p><p id="cc63a5e8-d602-4b6d-8db4-a0f4a49d3c28" class="">
+</p><figure id="2331bda0-65d8-4b60-aeca-2b5bbf97cf58" class="image" style="text-align:left"><a href="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled.png"><img style="width:463px" src="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled.png"/></a></figure><p id="c066bc8f-ef75-480a-860c-a1dfe30f07b8" class="">추후 개발할 앱들에도 똑같은 형태가 적용될 예정이니 잘 기억해 주세요.</p><p id="3d83eea1-032c-469c-81e4-ddfa28b34686" class="">
+</p><p id="7f0b1bbb-a1dd-49e0-9a20-ba54a13f0a54" class="">이대로 한번 폰에 실행해 보겠습니다.</p><p id="89497f60-b8f8-48bd-b614-195606341fa5" class="">지난 페이지에서 했던 <strong>새로 생성한 프로젝트 테스트</strong>를 지금 해보겠습니다.</p><figure id="512a19f7-ba6d-4d21-9d14-098275f1073c" class="image" style="text-align:left"><a href="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled%201.png"><img style="width:240px" src="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled%201.png"/></a></figure><p id="c46d5f4d-e9eb-44be-bb17-1ad5598d9558" class="">하얀 화면에 아무것도 안뜹니다. <mark class="highlight-blue">틀,</mark> <mark class="highlight-orange">로직, </mark><mark class="highlight-purple">스타일</mark> 아무것도 없으니까요.</p><p id="6cd1096e-7ca9-401b-9149-a666aa2809fb" class="">이제 본격적으로 틀을 작성해 보겠습니다!</p><p id="dfae2611-4ddd-4a95-88dc-8609f46ae205" class="">
+</p><h2 id="9a0f150a-6d6a-491c-afa5-c1bf1719daa3" class="">요소(Component) 추가하기</h2><p id="ee6ffefd-02c5-4541-afec-4ed5f0c93100" class=""><strong>“</strong><mark class="highlight-blue"><strong>틀 작성</strong></mark><strong>”</strong> 부분에 계산기의 요소들(텍스트, 버튼)들을 코드로 정의 할 꺼에요.</p><p id="8b0434b3-581a-48aa-9f45-90be2f049ae8" class="">텍스트와 버튼은 아래와 같은 형태로 <strong>“</strong><mark class="highlight-blue"><strong>틀 작성</strong></mark><strong>”</strong> 부분에 넣으시면 됩니다.</p><pre id="3d4718de-2f58-4312-a3ae-304222180260" class="code"><code>&lt;Text&gt; 표현할 값 &lt;/Text&gt; // 텍스트 요소 추가 방법
+&lt;Button title=&#x27;버튼 위 글자&#x27;&gt;&lt;/Button&gt; // 버튼 추가 방법</code></pre><p id="88ebe0f4-16b7-48a3-bcda-add6b34b3f48" class="">
+</p><p id="7cfeec46-f5d6-4456-8b1a-3ce442a5e39e" class="">로또 숫자를 표현할, Text 요소 6개의 예시로 11, 22, 33, 44, 55, 66를 추가하고, 버튼 하나를 추가 하겠습니다.</p><p id="cb584b3f-585f-48ba-9b63-436e372ab565" class="">
+</p><div id="1cf66295-5898-4ef5-905c-14edb7f201d7" class="column-list"><div id="0464c43b-6bd7-48d3-be56-41a8ae0bbb67" style="width:62.5%" class="column"><pre id="3292b5c1-aa0d-411f-8900-96e4a788f64e" class="code"><code>import React from &#x27;react&#x27;;
+import { View, StyleSheet } from &#x27;react-native&#x27;;
+
+const App = () =&gt; {
+
+  return (
+    &lt;View&gt;
+
+			&lt;Text&gt;11&lt;/Text&gt;
+      &lt;Text&gt;22&lt;/Text&gt;
+      &lt;Text&gt;33&lt;/Text&gt;
+      &lt;Text&gt;44&lt;/Text&gt;
+      &lt;Text&gt;55&lt;/Text&gt;
+      &lt;Text&gt;66&lt;/Text&gt;
+      &lt;Button title=&#x27;Generate&#x27;&gt;&lt;/Button&gt;
+      
+    &lt;/View&gt;
+  )
+};
+
+const styles = StyleSheet.create({
+
+});
+export default App;</code></pre></div><div id="5113a1f2-302b-45a7-b2a3-e779e9869622" style="width:37.50000000000001%" class="column"><figure id="693f1262-59ae-4e47-bd71-5d0834c72621" class="image"><a href="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled%202.png"><img style="width:336px" src="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled%202.png"/></a></figure></div></div><p id="c8809144-9a9c-497b-8637-8b24e361f601" class="">
+</p><h2 id="15f8c733-1815-4363-b37b-a8a6da1999d4" class="">요소(Component) 정렬하기</h2><p id="4ab7e9dc-1da7-4acc-8076-1dcba9a01292" class="">화면에 11, 22, 33, 44, 55, 66가 세로로 나왔는데, 가로로 나오면 좋을 것 같아요. 가로로 나오도록 수정해 보겠습니다. Text들을 View로 감싼 다음에 정렬 관련 스타일을 추가해 줍니다.</p><p id="8f1464ce-fb52-4c9a-aa67-64dfd944bf44" class="">
+</p><p id="5809a356-9e4d-42f2-9072-a61d79aaf1e6" class="">View의 스타일 내용을 요약하면,</p><ul id="6422a930-4b68-4405-b414-588739e2b5a0" class="bulleted-list"><li style="list-style-type:disc">View가 화면의 가로 길이(width)를 100% 다 쓰고, (width: &#x27;100%&#x27;,)</li></ul><ul id="52d19bcf-117f-495c-a60c-174dca435dab" class="bulleted-list"><li style="list-style-type:disc">마진은 20정도 두고, (margin: 20,)</li></ul><ul id="7b7a5602-645b-4ec9-96f1-3af6e7b8d6a2" class="bulleted-list"><li style="list-style-type:disc">View 내부에 있는 Text들을 가로 형태로 정렬 하면서 (flexDirection: &#x27;row&#x27;,)</li></ul><ul id="6808b5c1-5df7-4caa-b3a3-365e58544787" class="bulleted-list"><li style="list-style-type:disc">View 내부 요소들이 서로 간격을 같게 유지하도록 하는 것 (justifyContent: &#x27;space-around&#x27;)</li></ul><p id="8199159a-ea19-4be2-a2ba-5aca5975b314" class="">입니다.</p><div id="ed3e0a14-cd7c-4693-b43b-f9393f98b700" class="column-list"><div id="5360773b-2b73-418d-a0f3-c1aa5560cd79" style="width:62.5%" class="column"><pre id="2a61e6a7-c32a-46a9-87d5-05a6e43b6be8" class="code"><code>import React from &#x27;react&#x27;;
+import { View, StyleSheet } from &#x27;react-native&#x27;;
+
+const App = () =&gt; {
+
+  return (
+    &lt;View&gt;
+
+			&lt;View style={{
+        width: &#x27;100%&#x27;,
+        margin: 20,
+        flexDirection: &#x27;row&#x27;, // 가로로 정렬
+        justifyContent: &#x27;space-around&#x27; // 맞춤 방식 설정
+      }}&gt;
+        &lt;Text&gt;11&lt;/Text&gt;
+        &lt;Text&gt;22&lt;/Text&gt;
+        &lt;Text&gt;33&lt;/Text&gt;
+        &lt;Text&gt;44&lt;/Text&gt;
+        &lt;Text&gt;55&lt;/Text&gt;
+        &lt;Text&gt;66&lt;/Text&gt;
+      &lt;/View&gt;
+			&lt;Button title=&#x27;Generate&#x27;&gt;&lt;/Button&gt;
+
+    &lt;/View&gt;
+  )
+};
+
+const styles = StyleSheet.create({
+
+});
+export default App;</code></pre></div><div id="ff215a50-d540-4754-ba41-cac1772ad7eb" style="width:37.5%" class="column"><figure id="a418598e-dbf5-4692-a6a3-7e902bacd2b3" class="image"><a href="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled%203.png"><img style="width:385px" src="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled%203.png"/></a></figure></div></div><p id="8ad152d3-0822-4c01-82d9-dea2c3fd7c87" class="">
+</p><p id="b1001cfc-0f36-44ea-8c72-831794dcc551" class="">6개의 숫자와 버튼이 너무 상단에 있으니, 중앙으로 내려 보겠습니다.</p><p id="e1c1ddfe-f5bc-4409-87b3-4cd02cf29a10" class="">가장 바깥에서 감싸고 있는 View에 스타일을 적용합니다.</p><p id="ab2b3bec-db2a-41de-87ad-0a72f2e0dbda" class="">
+</p><p id="83bd581f-55c8-4420-82ec-c6f68b1fa5ba" class="">View의 스타일 내용을 요약하면,</p><ul id="dad85213-c0dc-4532-a2ad-232412f8e9a4" class="bulleted-list"><li style="list-style-type:disc">View가 화면의 세로 길이(height)를 100% 다 쓰고, (height: &#x27;100%&#x27;,)</li></ul><ul id="53f1bce5-458c-4050-9e86-2e73ec7ce3d7" class="bulleted-list"><li style="list-style-type:disc">View 내부의 각 아이템들을 가로방향 가운데 정렬 (alignItems: &#x27;center&#x27;,)</li></ul><ul id="bd0c902b-5e69-4f29-a8ec-24de7cc601c2" class="bulleted-list"><li style="list-style-type:disc">세로방향 가운데 정렬 (justifyContent: &#x27;center&#x27;)</li></ul><div id="83b175ce-2814-425e-aa9e-b3045273367a" class="column-list"><div id="72515baf-db8d-44b3-84e5-4b9176cb73d9" style="width:62.5%" class="column"><pre id="cb12919f-148e-439b-ae1c-c00353b36159" class="code"><code>import React from &#x27;react&#x27;;
+import { View, Text, Button, StyleSheet } from &#x27;react-native&#x27;;
+
+const App = () =&gt; {
+
+  return (
+    &lt;View style={{
+      height: &#x27;100%&#x27;,
+			alignItems: &#x27;center&#x27;,
+      justifyContent: &#x27;center&#x27;
+    }}&gt;
+
+      &lt;View style={{
+        width: &#x27;100%&#x27;,
+        margin: 20,
+        flexDirection: &#x27;row&#x27;, // 가로로 정렬
+        justifyContent: &#x27;space-around&#x27; // 맞춤 방식 설정
+      }}&gt;
+        &lt;Text&gt;11&lt;/Text&gt;
+        &lt;Text&gt;22&lt;/Text&gt;
+        &lt;Text&gt;33&lt;/Text&gt;
+        &lt;Text&gt;44&lt;/Text&gt;
+        &lt;Text&gt;55&lt;/Text&gt;
+        &lt;Text&gt;66&lt;/Text&gt;
+      &lt;/View&gt;
+
+      &lt;Button title=&#x27;Generate&#x27;&gt;&lt;/Button&gt;
+    &lt;/View&gt;
+  )
+};
+
+
+const styles = StyleSheet.create({
+
+});
+export default App;</code></pre></div><div id="e3cca1b0-a909-4a12-a113-2531dea23f35" style="width:37.49999999999999%" class="column"><figure id="4e1bc72e-013d-4309-ad6a-cabdf178e6fd" class="image"><a href="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled%204.png"><img style="width:385px" src="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled%204.png"/></a></figure></div></div><p id="68bafd38-8fb6-4b53-b231-980779ab7738" class="">
+</p><p id="012b3bad-8b67-4b7e-b504-7dd1f4b15f3b" class="">
+</p><h2 id="9521417e-d7bc-4153-a97d-7dab2b0220a0" class="">스타일 수정하기</h2><p id="82aa3406-7721-4c5f-b8f7-c2044e24f48c" class="">요소들을 추가, 정렬 했으니, 이젠 요소들의 스타일(동그라미 테두리)를 적용 해 보겠습니다.</p><p id="fd9305cd-46d2-4398-959f-948e8e20aa9d" class="">위에서 요소들을 정렬 할때, 해당 요소 상위에 View를 두고 View의 style을 수정하는 것을 보셨을 겁니다.</p><p id="2bb364cd-c131-4ca6-b45d-fa3a68d0e6dd" class="">지금은 각 Text의 동그라미 테두리를 만들어 줄 것이기 때문에, 각 Text를 View로 감싸고, 테두리를 적용 하겠습니다.</p><p id="5096a59c-e3ff-48e9-aa25-a5d6253565b5" class="">그 전에, 각 테두리에 적용할 스타일을 먼저 정의 하겠습니다.  코드에서 하단에 있는 “<strong><mark class="highlight-purple">스타일 작성</mark></strong>” 부분에 아래와 같이 numBorder추가합니다.</p><pre id="9361e2c2-2169-4366-8a45-790dfd3328f2" class="code"><code>const styles = StyleSheet.create({
+	numBorder: {
+    width: 40,
+    height: 40,
+    borderRadius: 40,
+    borderWidth: 1,
+    justifyContent: &#x27;center&#x27;,
+    alignItems: &#x27;center&#x27;
+  },
+});
+export default App;</code></pre><p id="9b708dcc-686f-4aab-a1b2-e615d362ee75" class="">
+</p><p id="d53e6203-e26e-424e-ae2c-51ea2723aa00" class="">그리고 각 Text를 View로 감싸고, View의 style에 numBorder를 추가해 줍니다.</p><div id="c94846dd-b90a-4065-97a0-5eca1fe938db" class="column-list"><div id="481fada7-893c-4b9e-8bbd-cf1270083afb" style="width:62.5%" class="column"><pre id="d62a18f1-21c8-41c2-b6fa-07aa9c1b2fe0" class="code"><code>import React from &#x27;react&#x27;;
+import { View, Text, Button, StyleSheet } from &#x27;react-native&#x27;;
+
+const App = () =&gt; {
+
+  return (
+    &lt;View style={{
+      height: &#x27;100%&#x27;,
+      alignItems: &#x27;center&#x27;,
+      justifyContent: &#x27;center&#x27;
+    }}&gt;
+
+      &lt;View style={{
+        width: &#x27;100%&#x27;,
+        margin: 20,
+        flexDirection: &#x27;row&#x27;, // 가로로 정렬
+        justifyContent: &#x27;space-around&#x27; // 맞춤 방식 설정
+      }}&gt;
+        &lt;View style={styles.numBorder}&gt;
+          &lt;Text&gt;11&lt;/Text&gt;
+        &lt;/View&gt;
+        &lt;View style={styles.numBorder}&gt;
+          &lt;Text&gt;22&lt;/Text&gt;
+        &lt;/View&gt;
+        &lt;View style={styles.numBorder}&gt;
+          &lt;Text&gt;33&lt;/Text&gt;
+        &lt;/View&gt;
+        &lt;View style={styles.numBorder}&gt;
+          &lt;Text&gt;44&lt;/Text&gt;
+        &lt;/View&gt;
+        &lt;View style={styles.numBorder}&gt;
+          &lt;Text&gt;55&lt;/Text&gt;
+        &lt;/View&gt;
+        &lt;View style={styles.numBorder}&gt;
+          &lt;Text&gt;66&lt;/Text&gt;
+        &lt;/View&gt;
+      &lt;/View&gt;
+
+      &lt;Button title=&#x27;Generate&#x27;&gt;&lt;/Button&gt;
+    &lt;/View&gt;
+  )
+};
+
+
+const styles = StyleSheet.create({
+  numBorder: {
+    width: 40,
+    height: 40,
+    borderRadius: 40,
+    borderWidth: 1,
+    justifyContent: &#x27;center&#x27;,
+    alignItems: &#x27;center&#x27;
+  },
+});
+export default App;</code></pre></div><div id="acf8606d-96bf-4a61-9d17-f89c0bf7c310" style="width:37.49999999999999%" class="column"><figure id="9be3d47d-812b-4d16-acab-38b56c0a6549" class="image"><a href="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled%205.png"><img style="width:385px" src="%E1%84%85%E1%85%A9%E1%84%84%E1%85%A9%20%E1%84%87%E1%85%A5%E1%86%AB%E1%84%92%E1%85%A9%20%E1%84%89%E1%85%A2%E1%86%BC%E1%84%89%E1%85%A5%E1%86%BC%E1%84%80%E1%85%B5%20-%202%203%200bd077a691ba4140a33c4112142a3a98/Untitled%205.png"/></a></figure></div></div><p id="bf74aaca-f79d-4da3-a370-89ef2d393658" class="">
+</p></div></article></body></html>
