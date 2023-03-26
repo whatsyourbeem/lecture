@@ -1,0 +1,739 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>랜딩 페이지 (설득하는 글쓰기)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ef9becb9-d7ca-451e-af08-d82bbca334d5" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1621560222298-0824faf9add5?ixlib=rb-4.0.3&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🛬</span></div><h1 class="page-title">랜딩 페이지 (설득하는 글쓰기)</h1></header><div class="page-body"><nav id="566cbe89-7dff-4dda-a1c7-ad619f484e71" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3d905700-a458-456c-ac02-90e5f32e88e5">마케팅 깔때기</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3a766407-35bb-4d13-8010-999852a0d417">랜딩 페이지 란</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d3e619d6-2ff9-40c3-a599-cd4ad0dad1d6">랜딩 페이지 활용하기</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#836dbd86-63db-42fd-9f38-9d9e2a0d872f">랜딩 페이지 만들기</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#acc86bd6-0d45-40c1-854f-ac7204f39450">Surfee</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b4841e47-8867-4177-9cf2-bedbcb0f9fdb">Notion</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#50390676-5778-424e-8727-af7913a82d75">설득하는 글쓰기</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#edd43034-4368-4e4d-a28f-7d91b1ab6190">1. 문제 공감</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#407d2590-0fe9-4084-8510-922a3dbc02e3">2. 서비스 설명</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#dcedc254-7546-41c6-8afe-eeb6aee98b30">3. 이득</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5dd2706b-76b2-46ff-978a-fadd90bfd834">4. 필살기</a></div></nav><hr id="f71970d2-289e-4b9b-b0fe-99a9d141c823"/><h1 id="3d905700-a458-456c-ac02-90e5f32e88e5" class="">마케팅 깔때기</h1><p id="3c4d037f-7192-4889-b7f7-e5d7df2758be" class="">우리가 아주 맛있는 햄버거를 파는 식당을 오픈했다고 가정해볼게요.</p><p id="eac85dde-f3e0-4ad1-9027-d71924552b25" class="">어떻게 하면 우리의 식당이 유명한 맛집이 될 수 있을까요?</p><p id="36821361-0f46-4a37-9dad-d9ae93ef2685" class="">
+</p><ol type="1" id="fd00b23c-1f66-47b0-8740-b4c0bbb71f74" class="numbered-list" start="1"><li><strong>발견</strong><p id="cb808050-5778-47d0-9504-21d474293819" class="">“저희 가게 오픈했어요~!!!🤗”</p><p id="d7393497-9edc-403b-a559-784da16bc5ed" class="">우선, 길을 가던 사람들이 우리 식당을 <span style="border-bottom:0.05em solid"><strong>발견하게 만드는 것</strong></span>이 중요하겠죠?</p><p id="aa3cbeba-6259-49a8-99cc-8b7373ebf9f7" class="">햄버거를 먹고 싶은데, 햄버거 식당이 있는지도 몰라서 못오는 건 너무 억울하잖아요!</p></li></ol><p id="ff017213-cd9a-4b91-80a9-ce41ea35c620" class="">
+</p><ol type="1" id="3646485d-0e10-4858-a151-21a6c9fa8d3c" class="numbered-list" start="2"><li><strong>방문</strong><p id="b3ebe446-99fa-4f6f-843e-5c41b2707ea0" class="">“길을 가다가 간판이 마음에 들어서, 어디선가 광고를 보고, 친구가 추천해줘서.”</p><p id="d2d8f7c6-4b40-4099-8b50-1e6d200d6dfd" class="">이유야 어찌 됐건, 중요한 것은 손님이 <span style="border-bottom:0.05em solid"><strong>방문을 하도록 만드는 것</strong></span>입니다.</p><p id="b534f8e7-9b47-4a47-b21b-32c6f850723d" class="">일단 방문이라도 해야 우리가 만든 맛있는 햄버거를 먹을 거 아니에요?!</p></li></ol><p id="d2a90a49-eaad-462c-a8ae-a97a2670923b" class="">
+</p><ol type="1" id="9f3f40c0-f457-43f8-ac29-bf7d28f9b18d" class="numbered-list" start="3"><li><strong>소비</strong><p id="91dc11d4-f159-4301-834d-3febac8bba43" class="">드디어 소중한 잠재적 고객이 식당에 들어와 자리에 앉았어요.</p><p id="2dd35ed0-606a-48cd-8411-1bc1c7d3e856" class="">우리는 최대한 친절한 표정과 말투로, 먹음직스러운 햄버거 사진이 담긴 메뉴판을 건넵니다.</p><p id="1ad52d4e-254b-4115-99b8-765b2b93dcd2" class="">손님이 우리가 만든 햄버거를 <span style="border-bottom:0.05em solid"><strong>소비하도록 유도</strong></span>하기 위해서죠!</p></li></ol><p id="33e2c914-3196-4ab3-b9c7-cad13b269aa6" class="">
+</p><ol type="1" id="a005ee96-83c9-4147-8cd2-09ae6832c997" class="numbered-list" start="4"><li><strong>재방문</strong><p id="dbf55b21-43a1-48a5-9e9d-6853785703c8" class="">이제 단골 손님이 생기기 시작합니다.</p><p id="cc17d1b1-721f-4832-bb2c-48b6c9cd8b3c" class="">역시 우리가 만든 햄버거가 맛있었나봐요. 서비스와 인테리어도 한 몫 했겠죠? 쿠폰 도장도 효과가 있었던 것 같아요.</p><p id="b432926d-9f2e-4902-ad8c-6975d55ba7aa" class="">손님이 <span style="border-bottom:0.05em solid"><strong>재방문하게 만드는 것</strong></span>, 브랜드에 충성도를 가진 고객을 확보하는 것이 중요합니다.</p></li></ol><p id="7b9072b5-dad6-4a10-94ac-f9642e02fd11" class="">
+</p><ol type="1" id="13ebaf8c-91ac-4e00-a314-512ce7cab4b1" class="numbered-list" start="5"><li><strong>입소문</strong><p id="d565e398-3075-4b5d-a812-fb03e2e39879" class="">우리의 햄버거를 좋아하는 단골 손님들이 주위에 입소문을 내기 시작합니다.</p><p id="c2c5ff01-a33a-446b-8c70-ab8a29b32f21" class="">소문을 들은 사람들은 <strong>2.방문</strong> 단계로 돌아가 위의 과정을 반복할 거에요.</p></li></ol><p id="671f2e76-74de-43a1-afb7-281ad70f55ab" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="66da8311-ee93-4b17-a2b3-574ebbc7ea59"><div style="font-size:1.5em"><span class="icon">🙂</span></div><div style="width:100%"><strong>마케팅에서는 위의 개념을 마케팅 깔때기(Marketing Funnel)라고 이야기해요.</strong><p id="5259d87d-5f60-4b32-b8df-d1a5dacf4365" class="">
+</p><figure id="9e6c6d59-7474-4295-b799-5c4da8782e03" class="image" style="text-align:center"><a href="%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%91%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%B5%20(%E1%84%89%E1%85%A5%E1%86%AF%E1%84%83%E1%85%B3%E1%86%A8%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%80%E1%85%B3%E1%86%AF%E1%84%8A%E1%85%B3%E1%84%80%E1%85%B5)%20ef9becb9d7ca451eaf08d82bbca334d5/Untitled.png"><img style="width:384px" src="%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%91%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%B5%20(%E1%84%89%E1%85%A5%E1%86%AF%E1%84%83%E1%85%B3%E1%86%A8%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%80%E1%85%B3%E1%86%AF%E1%84%8A%E1%85%B3%E1%84%80%E1%85%B5)%20ef9becb9d7ca451eaf08d82bbca334d5/Untitled.png"/></a><figcaption>마케팅 깔때기 모델</figcaption></figure></div></figure><p id="f36f0030-01fd-4089-a439-71441179ea46" class="">
+</p><p id="1329ead4-ae58-44e0-abd6-70fda5d484c3" class="">
+</p><p id="54266123-8130-4d13-a2fe-43904e9ecb57" class="">
+</p><hr id="9d722db3-9637-4b0e-b6d5-33b5520f7b35"/><h1 id="3a766407-35bb-4d13-8010-999852a0d417" class="">랜딩 페이지 란</h1><p id="66e82f80-92ae-48a7-9c67-7cd48ffb5259" class="">랜딩 페이지란, 사용자가 우리의 브랜드를 처음 접하는 웹페이지를 의미해요.</p><p id="38c82dd5-d9b9-4b1a-aea3-e8f9b1285dbb" class="">마케팅 깔때기에서 <strong>방문</strong>과 <strong>소비</strong>를 유도하는, 핵심적인 역할을 맡고 있죠.</p><p id="4429b1c4-bd52-47db-9e18-7cefcd59ff0e" class="">
+</p><figure id="61bdb061-b987-4c3f-b5d1-5108f56045ba"><div class="source"><a href="%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%91%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%B5%20(%E1%84%89%E1%85%A5%E1%86%AF%E1%84%83%E1%85%B3%E1%86%A8%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%80%E1%85%B3%E1%86%AF%E1%84%8A%E1%85%B3%E1%84%80%E1%85%B5)%20ef9becb9d7ca451eaf08d82bbca334d5/Screen_Recording_20221217_024739_Chrome.mp4">https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8c40b723-1c4c-49a8-afc0-86bffe453876/Screen_Recording_20221217_024739_Chrome.mp4</a></div><figcaption>토스 랜딩페이지</figcaption></figure><p id="2e8d3b5d-5e28-485c-b5c8-16692801385c" class="">
+</p><p id="dde1b4b5-780d-4a81-9a31-a646812fee2f" class="">위의 예시는 토스의 랜딩페이지 입니다.</p><p id="17bc748f-0093-4395-a70a-6b92b80cb234" class="">광고를 클릭했더니 토스의 랜딩페이지로 연결이 되더군요. <mark class="highlight-gray">(마케팅깔때기-(1)발견)</mark></p><p id="6a66c346-c16e-4896-8ed9-2303d03a2226" class="">
+</p><p id="6b879d0b-a74e-46bd-8840-4ed0581182d6" class="">저의 방문<mark class="highlight-gray">(마케팅깔때기-(2)방문)</mark>을 유도하기 위한 <mark class="highlight-blue"><strong>앱 다운로드</strong></mark> 버튼이 눈에 띄는군요.</p><p id="da6b54f1-da06-4631-9638-9a3f8748f1be" class="">스크롤을 내려보면 서비스의 핵심 기능이 설명되어 있고,</p><p id="1b846c3f-df7f-4680-8d65-9a41e70c8dca" class="">내가 이 서비스를 사용함으로서 얻는 이득이 무엇인지 나열되어 있는 것을 볼 수 있어요.</p><p id="66652b87-cb7f-46b9-b0aa-a01b41db910b" class="">
+</p><p id="753655cd-07f6-45e9-8768-802299682bbf" class="">
+</p><p id="24420ad7-437a-4945-85b4-cdc514156adf" class="">이처럼 랜딩페이지는 브랜드에 대한 이미지를 심어줌과 동시에</p><p id="44f7a33e-3738-4f45-838f-6125da42553d" class="">우리의 <span style="border-bottom:0.05em solid"><strong>서비스를 발견한 사람들이 → 서비스를 방문</strong></span>하도록 유도하는 기능을 합니다.</p><p id="8137c464-fd7e-4090-a727-5edcfe47e98f" class="">
+</p><p id="659b3187-e93d-404d-a4b3-dc17faa4f38f" class="">랜딩 페이지, 정말 잘 만들어야겠죠?</p><p id="8b22a8bc-b4a1-4fac-9b9e-36cb20ad1131" class="">
+</p><p id="83255452-2fb9-45ec-beda-88dec0bd53f3" class="">
+</p><p id="03823e8d-cf33-4fe3-98f0-4d22bfe35521" class="">
+</p><hr id="fdb50c02-98e0-4652-a6fc-f32610ffa561"/><h1 id="d3e619d6-2ff9-40c3-a599-cd4ad0dad1d6" class="">랜딩 페이지 활용하기</h1><p id="eae1eb35-25d4-4d36-938e-6684fb7e827e" class="">지금까지의 고전적인 상품 판매 사이클은 <strong>기획→개발→마케팅→판매</strong> 의 순서대로 진행되었어요.</p><p id="f0ec41d1-3e31-4502-94c3-9b9f23ccd3bb" class="">큰 기업들은 리스크를 최소화하기 위해, 개발 착수 전에 철저히 기획하고 검토하는 과정을 거쳤죠.</p><p id="1c4ea7a0-24ed-4566-b428-2fcecf30f4e6" class="">
+</p><p id="2a40888f-879f-4cab-9c68-1c4588198c2f" class="">그러나 우리는 다른 방식으로 접근해야 합니다. 바로 이렇게요.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="ccba2a7b-d619-4de0-afff-bae0805185fe"><div style="font-size:1.5em"><span class="icon">🚀</span></div><div style="width:100%"><strong>판매 → 마케팅 → 기획 → 개발</strong></div></figure><p id="e8767432-e07d-4506-82b0-4c3e2d0fc66a" class="">
+</p><p id="d6ac7cce-6522-43b0-85d3-593000f87b12" class="">아니, 준비된 상품이 없는데 뭘 어떻게 판매하냐고요? <span style="border-bottom:0.05em solid"><strong>랜딩 페이지</strong></span><span style="border-bottom:0.05em solid">를 활용해서 판매합니다.</span></p><p id="f918e9e8-e593-454e-8bc0-17eb21d9f982" class="">
+</p><p id="0f92f808-0baa-47f8-b100-7a21c7830f57" class="">우리가 보통 앱을 만들 땐<mark class="highlight-gray">(상품을 기획할 땐)</mark>,</p><p id="8e8fa4d7-3558-4025-a3a4-ef72fa6d6703" class="">‘이런 앱을 필요로 하는 사람이 있을 거야’ 라고 짐작한 후, 기획과 개발에 착수해요.</p><p id="da7d7df3-4164-479a-9dac-79f6ed3d489a" class="">많은 시간과 노력을 들여 개발이 모두 끝나면, 그제서야 마케팅과 판매를 시작하죠.</p><p id="183d5ee6-09cb-4019-a7aa-a1a422e03518" class="">
+</p><p id="990ee86e-a4ad-40c9-9eeb-5add03ddc083" class="">그런데 만약 우리의 짐작이 틀렸다면요?</p><p id="85554668-0fd5-4715-8730-636ccfafcaab" class="">싸늘한 시장의 반응에 상처 받고, 앱 개발을 포기하게 될 겁니다.</p><p id="924bb63e-f0e1-4d02-84fd-2022d6955c9c" class="">그래서, 가장 먼저 <strong>우리의 서비스를 원하는 사람이 있는지 검증해보는 것이 중요해요.</strong></p><p id="da4f29ff-739a-4a77-a36d-d6b3cf23767f" class="">
+</p><p id="957cad46-cf5e-4780-b6c7-df43235c40c2" class="">자, 아래와 같은 랜딩 페이지를 먼저 제작해보세요.</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c03d42c7-353a-4ead-bc60-4804378d29fa"><div style="font-size:1.5em"><span class="icon">📢</span></div><div style="width:100%">여러분, 그동안 이것 때문에 힘드셨죠?<p id="44104b82-076c-438b-bcbc-45fdb25310b5" class="">여러분의 문제를 해결해 줄 앱이 곧 출시됩니다!</p><p id="b5f1b42c-e6c4-4c20-b66b-f6e01c75ab4f" class="">지금 사전 신청하신 분들에게는 특별한 혜택을 드릴게요.</p><p id="e8be141b-105e-400a-9f92-7d1b261352bf" class="">아래 버튼을 눌러 사전 신청하세요!</p></div></figure><p id="0c2b7ccf-2584-46b3-8d0a-14911ca5b2ba" class="">
+</p><p id="d00e02a9-611b-4ffb-8056-f211e1175798" class="">그리고 아주 약간의 광고비<mark class="highlight-gray">(하루에 천원 정도)</mark>를 투자해서 랜딩 페이지를 광고해보세요.</p><p id="520dc567-c39f-438d-bb2e-a675135d87aa" class="">우리의 가설대로 우리의 앱을 원하는 사람이 많다면, 적은 광고비로도 충분한 반응이 올 겁니다.</p><p id="e4dc8a99-3c03-4bb5-9839-8702d7ca0787" class="">
+</p><p id="6f3ff67b-6459-43cf-9f8b-66ab6037bc7b" class="">만약 반응이 젼혀 없다면? 정말 축하할 일이죠! <strong>앱 개발에 드는 노력과 시간을 아낀 셈이니까요!</strong></p><p id="dd7a1373-a7a7-4c72-b3d7-6f6054ab7393" class="">
+</p><p id="a489ff50-e617-418a-9afc-1b3ac999d34c" class="">이렇게 예비 사용자들을 미리 확보한 다음 개발을 시작하셔도 늦지 않습니다.</p><p id="9be2e362-d4b9-45e9-9979-74b4491e4906" class="">
+</p><p id="21a4a765-d8c3-4f70-a927-d1dc328d5545" class=""><mark class="highlight-blue"><strong>빠르게 시도하고, 빠르게 실패하고, 또 빠르게 다시 시도하세요.</strong></mark></p><p id="5c47c84e-8648-41f6-89f4-714c3af81fb8" class="">
+</p><p id="82ef2f45-e60e-40b2-bd19-17d7d040d4a0" class="">
+</p><p id="0e9d2463-888b-4eae-ab42-582c59b6136b" class="">
+</p><hr id="72745421-c94c-4ca8-94cf-232ee34b59cd"/><h1 id="836dbd86-63db-42fd-9f38-9d9e2a0d872f" class="">랜딩 페이지 만들기</h1><p id="d5a8af44-362c-41ef-b1d1-a39c84960de3" class="">이제, 랜딩 페이지를 잘 만드는 것이 중요하다는 사실을 알았습니다.</p><p id="6f5668ce-4944-4e5c-bcc9-e8f3a27a26b6" class="">
+</p><p id="ae9204a9-3eba-480f-b19b-f27425e5913b" class="">그런데… 언제 다 만들죠? 😥</p><p id="213b3449-932d-4b62-bb74-17ab1f9b06c3" class="">우리는 최소한의 시간과 노력으로 빠르게 많이 시도하는 <mark class="highlight-blue"><strong>BEEMER</strong></mark>들인데,</p><p id="a2852f87-70a5-4480-83e6-adef639ed681" class="">랜딩 페이지 만드는 데에 너무 많은 노력을 쏟을 수는 없잖아요?</p><p id="d58d037e-80bd-4fee-8e6d-e445ac27cf8b" class="">
+</p><p id="b7cfa82a-b3e4-4867-a967-df55dd0be35e" class="">이번에는, 랜딩 페이지를 쉽게 제작할 수 있는 무료 서비스에 두 가지에 대해 소개하려고 해요.</p><p id="b6380896-11a0-46d8-915f-2663bae75229" class="">
+</p><p id="3f364f71-117c-4696-a315-1774b31b1f71" class="">
+</p><h2 id="acc86bd6-0d45-40c1-854f-ac7204f39450" class="">Surfee</h2><figure id="34e5b9ba-5bfa-4427-b794-26c6c3193310"><a href="https://surfee.co.kr/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Surfee</div><div class="bookmark-description">나만의 랜딩페이지를 코딩없이 쉽고 빠르게 제작해보세요. 지금 당장 무료로 제작할 수 있습니다! 노코드 랜딩페이지 제작툴, Surfee</div></div><div class="bookmark-href"><img src="https://surfee.co.kr/favicon.ico" class="icon bookmark-icon"/>https://surfee.co.kr/</div></div></a></figure><p id="7e506bdb-7c1e-4640-bd35-76001b56b02e" class="">
+</p><p id="7ab82a3e-9ce6-4ab7-8807-1f6ea3c796e8" class=""><strong>Surfee</strong>는 <strong>노코딩 웹페이지 제작 서비스</strong>입니다.</p><p id="98f966de-566f-4b6e-89e5-82a25a8667fa" class="">현재 베타 서비스 기간으로, 모든 서비스를 무료로 사용할 수 있어요.</p><p id="8e6675e4-673f-4869-a2cf-ede64575a3a5" class="">
+</p><p id="9a17d1bf-731a-44a0-b595-5707c8e2d441" class="">랜딩 페이지를 만드는 데에 최적화된 서비스이기 때문에, 필요한 템플릿은 모두 갖추고 있어요.</p><p id="13a9edb9-13a6-440d-811e-c37257b653ff" class="">처음 사용하시는 분들이라도, 누구나 쉽게 랜딩 페이지를 만들 수 있을 거에요!</p><p id="d229ccc7-e11d-4a23-90a4-050846993a97" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cdbbe8fd-ad24-40e5-8f6a-a4d7ff84c4a2"><div style="font-size:1.5em"><span class="icon">🤩</span></div><div style="width:100%"><strong>Surfee를 활용한 랜딩페이지 사례 (BEEM!)</strong><figure id="68ca1d8e-bc97-45df-9963-71db260d0131"><a href="https://surfee.co.kr/beem" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title"></div></div><div class="bookmark-href">https://surfee.co.kr/beem</div></div></a></figure><p id="6b4a8cc7-e267-4a48-93d2-01e569f2c1a6" class="">
+</p><p id="07cd98cd-cf85-462f-9175-e8bc2061c392" class="">Surfee에서는 각종 유저 유입 데이터도 쉽게 확인할 수 있어요.</p><figure id="5740a922-4587-4a6c-9f1a-45bc3f94cba9" class="image" style="text-align:center"><a href="%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%91%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%B5%20(%E1%84%89%E1%85%A5%E1%86%AF%E1%84%83%E1%85%B3%E1%86%A8%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%80%E1%85%B3%E1%86%AF%E1%84%8A%E1%85%B3%E1%84%80%E1%85%B5)%20ef9becb9d7ca451eaf08d82bbca334d5/Untitled%201.png"><img style="width:576px" src="%E1%84%85%E1%85%A2%E1%86%AB%E1%84%83%E1%85%B5%E1%86%BC%20%E1%84%91%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%B5%20(%E1%84%89%E1%85%A5%E1%86%AF%E1%84%83%E1%85%B3%E1%86%A8%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%80%E1%85%B3%E1%86%AF%E1%84%8A%E1%85%B3%E1%84%80%E1%85%B5)%20ef9becb9d7ca451eaf08d82bbca334d5/Untitled%201.png"/></a></figure></div></figure><p id="d2e6fe46-f768-4f19-a8e6-d2a9f5f7468f" class="">
+</p><p id="bfb358af-0c14-43cf-b623-520686d6c19d" class="">
+</p><h2 id="b4841e47-8867-4177-9cf2-bedbcb0f9fdb" class="">Notion</h2><p id="1953cfd6-a22e-445d-9ee2-24380431ef99" class="">BEEM!의 강의 노트, 모두 Notion으로 작성되어 있는 거 알고 계시죠?</p><p id="ffd22b33-3580-480e-88fa-850630307fcd" class="">바로 이 Notion의 웹페이지 게시 기능을 활용하여, 간단한 랜딩페이지를 만들 수 있어요.</p><p id="3cd2f1c4-64bc-413e-93e6-ec09fedfa085" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6cb091b8-c937-4d93-ab64-e179cf138db3"><div style="font-size:1.5em"><span class="icon">🤩</span></div><div style="width:100%"><strong>Notion을 활용한 랜딩페이지 사례 (스프린트 앱)</strong><figure id="150ec591-35d3-49a6-8f35-47e712b2d1f2"><a href="https://www.sprintapp.team/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">스프린트 SPRINT 대-충 기록해도 찰떡같이 관리되는 탁월함. 스프린트와 지금부터 스마트하게 식단 관리 다-시 시작해요.</div><div class="bookmark-description">그 동안 귀찮았던 식단 기록 스프린트가 스-마-트하게 대신 해드립니다 🔥 한땀 한땀 귀찮은 입력은 이제 그만- 아까 드셨던 그 것- 사진이든 글이든 그냥 편하게 올려주세요.</div></div><div class="bookmark-href"><img src="https://oopy.lazyrockets.com/api/rest/cdn/image/4c775573-260e-4fa0-a136-3aaf151dc6e9.png?d=16" class="icon bookmark-icon"/>https://www.sprintapp.team/</div></div><img src="https://oopy.lazyrockets.com/api/rest/cdn/image/bcc287b3-c2e4-4a9f-b5b1-fc3b6536e98d.png" class="bookmark-image"/></a></figure></div></figure><p id="09b5a98d-0691-4d94-a3c4-090c36e8a160" class="">
+</p><p id="b7381df6-8cc4-448f-9d52-4b06c571a448" class="">
+</p><p id="cc12585e-819f-4025-869d-6a6c5c8fe014" class="">
+</p><hr id="a57b71a3-665f-4a67-970d-94ea17cc086d"/><h1 id="50390676-5778-424e-8727-af7913a82d75" class="">설득하는 글쓰기</h1><p id="3039951b-bec1-4433-be1d-cb17b33d9713" class="">온라인 시대가 되면서,</p><p id="a456fbe6-f9a9-46a9-80c3-55986e2dbd13" class="">이제 우리는 상품을 구매할 때 상품을 직접 보고 만져볼 수 없게 되었습니다.</p><p id="2ffba2d8-f76a-4e80-8b12-712a8bdaf42d" class="">우리가 구매를 결정하는 요소는 바로 상품에 대한 <strong>설명 글</strong> 이죠.</p><p id="d53d57aa-24a7-4e3a-9a19-df91c8eb66fe" class="">즉, 우리는 <strong>상품을 사는 게 아니라 글을 사는 것 </strong>이라고 말할 수 있겠네요!</p><p id="67e7d3d3-e4b7-4c8a-a5c8-62370b0e9ed1" class="">
+</p><p id="19888ab9-8efc-4fdc-87fc-06d21686fb2c" class="">이번 세션에서는,</p><p id="2db7d619-e629-415b-bf8a-db3fcb0241d0" class="">사람들이 우리의 서비스를 방문하고 소비하도록 설득하는 <strong>글쓰기 공식</strong>에 대해 이야기하려고 합니다.</p><p id="7506fd9d-3b6e-40be-8689-f244841f0cc0" class="">아래의 네 단계와 순서를 잘 기억해주세요!</p><p id="4c7341a8-d859-405b-9935-15b59ff9c4e1" class="">
+</p><p id="ee6706ac-8965-454c-968d-4ecf5a71b557" class="">
+</p><hr id="2c0d9607-3b43-4497-b5ae-c7ca86fab899"/><h2 id="edd43034-4368-4e4d-a28f-7d91b1ab6190" class="">1. 문제 공감</h2><p id="64fe1cbb-0404-4c7f-ad28-d63704fd74eb" class="">우리가 아무리 열심히 글을 써도, 대부분의 사람들은 첫 문장만 보고 닫기 버튼을 누를 거에요. </p><p id="84637620-fe9d-4a3b-bc69-cd648dee353c" class=""><mark class="highlight-gray">(저도 그랬던 경험이 많아서…)</mark></p><p id="9f481f1b-68e3-4d4b-965c-01dc02f4c3c2" class="">그렇기 때문에, <strong>도입부에서 사람들의 시선을 사로잡고 감정을 이끌어내는 것</strong>이 중요한데요.</p><p id="d0f546ba-8353-4d18-80ac-8be67d0c23b9" class="">
+</p><p id="31a49536-4034-43a7-99d0-2548d39b847c" class="">우리의 서비스는 결국 <span style="border-bottom:0.05em solid">누군가의 문제를 해결해주고 그 대가로 보상을 받는 것</span> 이잖아요.</p><p id="4581ddc9-7355-416f-abfd-1269b01eb0b5" class="">사람들은 <strong>자신이 겪고 있는 문제에 대해 </strong><span style="border-bottom:0.05em solid"><strong>감정적으로</strong></span><strong> 공감해줄 때</strong>, 본능적으로 눈길이 갑니다.</p><p id="cd67abe1-ad1f-4f34-8f63-3a2c1ea7c884" class="">
+</p><p id="85260ef1-6648-4085-8e78-eed3bedc66ee" class="">타겟 고객이 고개를 끄덕이며 공감할 수 있는 글을 쓰려면,</p><p id="f26e2c62-fc8a-4fcc-8c22-0f0f24eb8b44" class="">무엇보다 타겟 고객이 누구인지 명확하게 정의되어 있고,</p><p id="a3ca864b-0276-495f-83f9-5f1e05d5676c" class="">그들이 겪고 있는 문제에 대해 잘 이해하고 있어야겠죠?</p><p id="0ee5c205-0c3f-4719-a8ba-c2743d613ad9" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="39e51f23-4c6e-40b3-8863-e8c0c9149a4c"><div style="font-size:1.5em"><span class="icon">📢</span></div><div style="width:100%"><strong>1. 문제 공감 예시</strong><p id="e32ce44a-7f36-4de4-8861-da3adcbe4e48" class="">혹시 이런 생각 들지 않으세요?</p><p id="6037bdb6-b57b-44f5-9aef-854720733f83" class="">✔ 회사 외 부수입을 얻고 싶은데 뭘 해야할지 모르겠어요</p><p id="8ec735c0-165a-4e89-8ac9-0ba11452a26e" class="">✔ 나만의 아이디어를 앱으로 빠르게 만들어보고 싶어요</p><p id="751f687f-c28a-4bdc-85e3-274c136fcb53" class="">✔ 그런데... 누가 옆에서 하나하나 도와줬으면 좋겠어요</p></div></figure><p id="cd527c61-1fb8-4893-a19f-6a66cd80ca2d" class="">
+</p><p id="a5298444-5eff-47ad-a491-2cdc3f758ce4" class="">
+</p><hr id="aea11e06-e599-4f98-986e-761cd86a46c6"/><h2 id="407d2590-0fe9-4084-8510-922a3dbc02e3" class="">2. 서비스 설명</h2><p id="f9961876-af42-4a4c-9b41-b01b72c2fbe6" class="">이제, <strong>문제에 대한 답이 여기에 있다!</strong> 라고 큰 소리로 어필할 차례입니다.</p><p id="d2b69365-93ba-452a-9ee9-2649cdc293cc" class="">우리의 서비스는 이런 기능이 있기 때문에, 이걸 활용하면 문제를 해결할 수 있다고 말이죠.</p><p id="a2a8b87e-aba8-44d5-b790-e108b2fa14a6" class="">
+</p><p id="df422b45-be9a-474a-94b6-4c0eabf999af" class="">여기에서 중요한 건, 너무 많은 기능들을 나열하면 안된다는 거에요.</p><p id="c2325b9d-41b4-469c-a6ba-4bd1d18b315a" class="">고객들은 아직 우리의 서비스를 경험해보지 못했기 때문에,</p><p id="d251af58-e6c0-437e-ba06-80d2ff397196" class="">너무 많은 기능을 설명하면, <em>“그래서 결국 뭐하는 서비스인데?”</em> 라며 혼란만 야기할 수 있어요.</p><p id="ea11a257-aef7-4daa-8343-cb65f7d133a3" class="">
+</p><p id="53268aad-79d6-4410-a1a3-b0f9db49fb8c" class="">핵심 문제를 해결할 핵심 기능 딱 <strong>3 가지</strong>면 충분합니다.</p><p id="2c359f9b-258e-4f30-b734-faa8ee3c2f4f" class="">심리학에서도 3의 법칙이라는 게 있는데,</p><p id="340b02c6-00c8-4c0c-b4c0-54e249b347ac" class="">사람들은 3개의 정보를 가장 편안하고 설득력있는 정보라고 생각한대요.</p><p id="a8dc5733-88a0-462c-a915-9fae207d7229" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="54cf7a42-f871-45e4-8cff-80ac6d681632"><div style="font-size:1.5em"><span class="icon">📢</span></div><div style="width:100%"><strong>2. 서비스 설명 예시</strong><p id="0a23cd6c-2845-41fc-8331-19a2b246094d" class="">BEEM!이 해결해드릴게요</p><p id="96b5b0a0-568f-436f-9e97-641924d29253" class="">✔ 기획부터 개발, 마케팅까지 - 나만의 강력한 무기 갖기</p><p id="e0ccea3a-fdaa-4058-8b71-ba1fd53903bd" class="">✔ 무슨 아이디어든 앱으로 빠르게 - 앱부터 서버까지 탄탄한 커리큘럼</p><p id="53f39c85-0829-4a59-8866-4495bff8d98c" class="">✔ 당신의 아이디어가 세상에 나올 떄까지 - 끝까지 함께하는 개인 맞춤형 클래스</p></div></figure><p id="7a28afcb-5ae0-41c3-ba8c-3cc3be37878b" class="">
+</p><p id="5b2620cd-2d12-41c2-9fa6-e78f4ca1d1c6" class="">
+</p><hr id="d42bd313-6831-49da-9bd2-ad206e7879eb"/><h2 id="dcedc254-7546-41c6-8afe-eeb6aee98b30" class="">3. 이득</h2><p id="582d016c-1aa4-4d90-89ca-96e709d919d0" class="">우리의 서비스가 무엇인지 위에서 설명했으니까,</p><p id="902f4053-e3a2-455c-84ec-55ba19046021" class="">이젠 우리의 서비스를 이용함으로서 얻는 구체적인 이득을 제시할 차례입니다.</p><p id="bf0fb862-d8fa-4a63-a781-a4c61ec5b956" class="">
+</p><p id="22fc80ec-e21d-457a-9645-c094f4b89d23" class="">이 때 팁이 있다면, 사용자가 얻는 이득을 객관적으로 수치화 하는 거에요. 이런식으로 말이죠.!</p><ul id="c628d48a-f547-4bcb-89b3-ba53bfc691dd" class="bulleted-list"><li style="list-style-type:disc"><em>우리의 서비스를 이용하면 XX시간을 절약할 수 있어요.</em></li></ul><ul id="803a1bf4-9007-4328-823f-96d668e4f027" class="bulleted-list"><li style="list-style-type:disc"><em>다른 서비스 대비 XX원을 절약할 수 있어요.</em></li></ul><p id="ed3ccfb0-c203-496b-b58b-b893516a2776" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="734a90cc-c2a6-41fe-99cc-34f7aedc2467"><div style="font-size:1.5em"><span class="icon">📢</span></div><div style="width:100%">3<strong>. 이득 예시</strong><p id="1c470169-afed-4e8e-9242-accbf672067d" class="">앱 하나를 만드는 데에 평균 3,501,491원이 소요됩니다.</p><p id="3c8e8a04-a4b6-4de5-bcd2-f5943841b07e" class="">✔ 아이디어가 샘솟아서 만들고 싶은 앱이 10개 쯤 된다면?</p><p id="315f6e7f-b886-49af-af64-6ab7b913ce92" class="">✔ 돈 내고 앱 만들었는데, 추후에 수정할 내용이 생긴다면?</p><p id="c4648176-44ff-441c-a7ee-621807ec5a22" class="">월급 외 수익을 만들고자 할 때, 개인 사업을 시작할 때, 커리어 전환을 하고자 할 때,</p><p id="6738b0db-a780-44fb-b6eb-70fae7752d2d" class="">앱을 기획하고, 만들고, 마케팅하는 능력은 강력한 무기✨가 됩니다.</p></div></figure><p id="06c76278-215b-45d4-a55c-439e21834c25" class="">
+</p><p id="17ce41ee-67be-4dce-8fbc-fbd4f43acde3" class="">
+</p><hr id="2e8c9f8a-4223-4b8c-a8ec-5fc80d1cb777"/><h2 id="5dd2706b-76b2-46ff-978a-fadd90bfd834" class="">4. 필살기</h2><p id="bdce85bb-8aa7-4a29-8fc3-31b945a04a65" class="">이제 사람들을 확 끌어당길 마지막 한 방!이 필요해요.</p><p id="03111ac6-98be-4ab6-8e2b-4aa9dc05c7b9" class="">가장 강력한 무기는 <strong>실제 사용 후기</strong> 라고 생각하는데요.</p><p id="610046f2-458c-4606-bdb2-043b9d38f886" class="">
+</p><p id="94085149-e5ba-44f2-b63b-c562955e2040" class="">우리는 일반적으로 무엇을 이용하고자 할 때, <strong>사회적 증거</strong>를 고려합니다.</p><p id="49cf4b5d-f7df-4508-a26f-7dc0e3d2b811" class="">실패의 확률을 줄이기 위해, 다수의 선택을 믿는 거죠.</p><p id="5d1959d2-bf38-4b88-98de-384ccdef88ad" class="">서비스를 사용해본 사람들의 실제 후기는 강력한 설득력을 갖습니다.</p><p id="80f4dace-9d69-4d14-b72f-2e50f1992d9b" class="">
+</p><p id="a0223d53-681e-403a-9eac-fee840219093" class="">그 외에도 타임세일 행사 등을 도입해서, 사용자들의 이용을 촉진하는 방법이 있어요.</p><p id="5775d508-e9e3-4605-a470-42007e7980fe" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="48da1e95-6099-45b6-a562-6d96cd880b43"><div style="font-size:1.5em"><span class="icon">📢</span></div><div style="width:100%">4<strong>. 필살기 예시</strong><p id="236319b1-fa19-4d62-b1ec-7c5ece9664f9" class="">사용자들의 생생한 후기입니다</p><p id="ee92c27b-dafc-457a-a407-356e8130c2b6" class="">✔ 이제 개발하고 싶은 앱이 있으면 언제든 할 수 있을 것 같아요</p><p id="29c49791-7235-49bf-9cb7-a44b925cfe4f" class="">✔ 게임하고 웹툰보는 시간이 아까워졌어요</p><p id="bdbbd64c-979f-41b3-9ea2-a02c48f99e0f" class="">
+</p><p id="61bca8e1-0c97-4bce-ab05-b959cbb5e86d" class="">지금 사전 신청하고 얼리버드 50% 할인 받기!</p></div></figure><p id="d515b7d3-06ec-4247-99cb-6f45c4e046b1" class="">
+</p><p id="91dc10ba-98ba-4e07-ba58-3c4f943a24d9" class="">
+</p><p id="020b7dc1-d1f4-4c41-83c4-d6521e141458" class="">
+</p><hr id="17d10dc8-ee50-4935-96e0-4765ae3bfd3d"/><p id="d6986d22-7723-421f-87ab-883e39764c7d" class="">
+</p></div></article></body></html>
